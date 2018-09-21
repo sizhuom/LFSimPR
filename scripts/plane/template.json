@@ -1,0 +1,32 @@
+{
+	"libDir": "/media/sizhuo/Seagate/LFData/Images/Sim/0204-twoplanes-stereo",
+	"povFile": "scene.pov",
+	"extraOpt": "+MI5120 File_Gamma=2.2 Bits_Per_Color=16",
+	"type": "perspective",
+	"camParam": {
+		"resol": [766,1104],
+		"noise": {
+			"enabled": 0,
+			"capacity": 50000,
+			"intensity": 500000,
+			"time": 0.01,
+			"readout": 10,
+			"gain": 0.0002
+		},
+		"R": [
+			[1,0,0],
+			[0,1,0],
+			[0,0,1]
+		],
+		"t": [
+			[0],
+			[0],
+			[0]
+		],
+		"K": [
+			[0.0005405305165,0,-0.2986431104],
+			[0,0.0005405305165,-0.2072934531],
+			[0,0,1]
+		]
+	}
+}
