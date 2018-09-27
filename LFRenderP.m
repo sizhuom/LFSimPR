@@ -32,8 +32,14 @@ if skipExist && exist(finalFile, 'file')
     return
 end
 
-command = sprintf('povray "+I%s" "+L%s" +W%d +H%d "+O%s" "+HI%s" -D -V Declare=EXT_CAMERA=1 %s',...
+if ispc
+command = sprintf('pvengine /EXIT /RENDER %s +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
     povFile, libDir, width, height, imFile, camParam.camFile, extraOpt);
+else
+command = sprintf('povray %s +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+    povFile, libDir, width, height, imFile, camParam.camFile, extraOpt);
+end
+
 disp(command);
 system(command);
 
