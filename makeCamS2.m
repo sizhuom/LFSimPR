@@ -34,7 +34,7 @@ Knew = [K(:,1:2) K(:,3)+principal-principal0];
 dirLen = 1/(camParam.resol(2)*K(1,1));
 dir = principal * dirLen;
 
-fprintf(fout, '#version 3.71;\n');
+fprintf(fout, '#version 3.7;\n');
 fprintf(fout, [
     'camera {\n'...
     'perspective\n']);

@@ -37,8 +37,13 @@ end
 rng(41);
 if prod(camParam.lfSamples) == 1
     makeCamUserDefined(camParam.camFile, camParam);
-    command = sprintf('povray "+I%s" "+L%s" +W%d +H%d "+O%s" "+HI%s" -D -V Declare=EXT_CAMERA=1 %s',...
-        povFile, libDir, width, height, lfFile, camParam.camFile, extraOpt);
+    if ispc
+        command = sprintf('povray /EXIT /RENDER +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+            povFile, libDir, width, height, lfFile, camParam.camFile, extraOpt);
+    else
+        command = sprintf('povray +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+            povFile, libDir, width, height, lfFile, camParam.camFile, extraOpt);
+    end
     disp(command);
     system(command);
 else % Render multiple images for antialiasing
@@ -61,8 +66,13 @@ else % Render multiple images for antialiasing
             continue
         end
         
-        command = sprintf('povray "+I%s" "+L%s" +W%d +H%d "+O%s" "+HI%s" -D -V Declare=EXT_CAMERA=1 %s',...
-            povFile, libDir, width, height, sampleFile, camParam.camFile, extraOpt);
+        if ispc
+            command = sprintf('povray /EXIT /RENDER +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+                povFile, libDir, width, height, sampleFile, camParam.camFile, extraOpt);
+        else
+            command = sprintf('povray +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+                povFile, libDir, width, height, sampleFile, camParam.camFile, extraOpt);
+        end
         disp(command);
         system(command);
     end

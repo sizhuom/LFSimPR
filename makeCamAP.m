@@ -27,7 +27,7 @@ principal = H(3:5,3:5) * centerRay;
 dirLen = 1/(camParam.resol(4)*H(3,3));
 dir = principal * dirLen;
 
-fprintf(fout, '#version 3.71;\n');
+fprintf(fout, '#version 3.7;\n');
 fprintf(fout, [
     'camera {\n'...
     'perspective\n']);

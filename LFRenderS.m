@@ -34,8 +34,13 @@ for i = 0:1
         continue
     end
     
-    command = sprintf('povray "+I%s" "+L%s" +W%d +H%d "+O%s" "+HI%s" -D -V Declare=EXT_CAMERA=1 %s',...
-        povFile, libDir, width, height, imFile, camParam.camFile, extraOpt);
+    if ispc
+        command = sprintf('povray /EXIT /RENDER +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+            povFile, libDir, width, height, imFile, camParam.camFile, extraOpt);
+    else
+        command = sprintf('povray +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" -D -V Declare=EXT_CAMERA=1 %s',...
+            povFile, libDir, width, height, imFile, camParam.camFile, extraOpt);
+    end
     disp(command);
     system(command);
     

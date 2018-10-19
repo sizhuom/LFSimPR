@@ -34,8 +34,13 @@ height = camParam.resol(1) * camParam.resol(3);
 [pathstr, name, ext] = fileparts(outFile);
 lfFile = fullfile(pathstr, [name '-no-noise' ext]);
 logFile = [name '.log'];
-command = sprintf('povray "+I%s" "+L%s" +W%d +H%d "+O%s" "+HI%s" "+GA%s" -D Declare=EXT_CAMERA=1 %s',...
-    povFile, libDir, width, height, lfFile, camParam.camFile, logFile, extraOpt);
+if ispc
+    command = sprintf('povray /EXIT /RENDER +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" +GA"%s" -D Declare=EXT_CAMERA=1 %s',...
+        povFile, libDir, width, height, lfFile, camParam.camFile, logFile, extraOpt);
+else
+    command = sprintf('povray +I"%s" +L"%s" +W%d +H%d +O"%s" +HI"%s" +GA"%s" -D Declare=EXT_CAMERA=1 %s',...
+        povFile, libDir, width, height, lfFile, camParam.camFile, logFile, extraOpt);
+end
 disp(command);
 startTime = clock();
 system(command);
